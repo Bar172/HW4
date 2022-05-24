@@ -65,7 +65,25 @@ void countStudentsAndCourses(const char* fileName, int** coursesPerStudent, int*
 
 int countPipes(const char* lineBuffer, int maxCount)
 {
-	//add code here
+	int cntPipe = 0;
+	char tav;
+	FILE* origin = fopen("studentList.txt", "r");
+	if (origin == NULL)
+	{
+		printf("Error of opening file!!");
+		exit(1);
+	}
+	while (!feof(origin))
+	{
+		tav = fgetc(origin);
+		if (tav == '|')
+		{
+			cntPipe++;//number of pipes in the text
+	   }
+		fseek(origin, 1, SEEK_CUR);
+
+	}
+
 }
 
 char*** makeStudentArrayFromFile(const char* fileName, int** coursesPerStudent, int* numberOfStudents)
@@ -99,7 +117,7 @@ void studentsToFile(char*** students, int* coursesPerStudent, int numberOfStuden
 
 void writeToBinFile(const char* fileName, Student* students, int numberOfStudents)
 {
-	file;
+	//
 }
 
 Student* readFromBinFile(const char* fileName)
