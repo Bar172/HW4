@@ -28,6 +28,8 @@ char*** makeStudentArrayFromFile(const char* fileName, int** coursesPerStudent, 
 void printStudentArray(const char* const* const* students, const int* coursesPerStudent, int numberOfStudents);
 void factorGivenCourse(char** const* students, const int* coursesPerStudent, int numberOfStudents, const char* courseName, int factor);
 void studentsToFile(char*** students, int* coursesPerStudent, int numberOfStudents);
+//
+void rewind(FILE* origin);
 
 //Part B
 Student* transformStudentArray(char*** students, const int* coursesPerStudent, int numberOfStudents);
@@ -58,11 +60,40 @@ int main()
 	return 0;
 }
 
+//2
 void countStudentsAndCourses(const char* fileName, int** coursesPerStudent, int* numberOfStudents)
 {
-	//add code here
+	int cntLines;//count number of lines
+	char tav2;
+	FILE* origin = fopen(fileName,"r");
+	if (origin == NULL)
+	{
+		printf("Error of opening file!!");
+		exit(1);
+	}
+
+	while (!feof(origin))//until end of file
+	{
+		tav2 = fgetc(origin);
+		if (tav2 == '\n')//end line
+		cntLines++;
+
+		fseek(origin, 1, SEEK_CUR);//move one step
+
+	}
+	*(numberOfStudents) = &cntLines;//?בתור מצביע ככה
+	//we need to do the allocation here!!
+	 
+	//after the first time review the text we do rewind
+	rewind(origin);//hasaman goes back to the start of the text
+	while (!feof(origin))
+	{
+
+	}
+
 }
 
+//1
 int countPipes(const char* lineBuffer, int maxCount)
 {
 	int Ntav=0;//symbol the place of tav
@@ -81,8 +112,7 @@ int countPipes(const char* lineBuffer, int maxCount)
 	
 	return cntPipe;
 	
-		
-
+	
 }
 
 char*** makeStudentArrayFromFile(const char* fileName, int** coursesPerStudent, int* numberOfStudents)
