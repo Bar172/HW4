@@ -65,24 +65,23 @@ void countStudentsAndCourses(const char* fileName, int** coursesPerStudent, int*
 
 int countPipes(const char* lineBuffer, int maxCount)
 {
-	int cntPipe = 0;
-	char tav;
-	FILE* origin = fopen("studentList.txt", "r");
-	if (origin == NULL)
+	int Ntav=0;//symbol the place of tav
+	if (maxCount <= 0)
+		return 0;
+	int cntPipe = 0;//count number of pipes
+	if (lineBuffer == NULL)
+		return -1;
+	while (( * (lineBuffer) != '\0') || maxCount==Ntav)
 	{
-		printf("Error of opening file!!");
-		exit(1);
-	}
-	while (!feof(origin))
-	{
-		tav = fgetc(origin);
-		if (tav == '|')
+		if (lineBuffer[Ntav] == '|')
 		{
-			cntPipe++;//number of pipes in the text
-	   }
-		fseek(origin, 1, SEEK_CUR);
-
+			cntPipe++;
+		}
 	}
+	
+	return cntPipe;
+	
+		
 
 }
 
